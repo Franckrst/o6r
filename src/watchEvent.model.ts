@@ -4,7 +4,7 @@ import {WatchEventEnum} from "./watch.type";
 export class WatchEventModel<T = any> {
     constructor(
         public type : WatchEventEnum,
-        public ressource : T,
+        public resource : T,
         public delta ?: DeltaModel[]) {
     }
 }

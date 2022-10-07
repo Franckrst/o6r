@@ -12,7 +12,7 @@ import {WatchEventEnum} from "./watch.type";
 export class Watcher {
 
     public obs: Observable<WatchEventModel>;
-    private ressources : Map<string,any> = new Map();
+    private resources : Map<string,any> = new Map();
     private _subject: Subject<WatchEventModel> = new Subject()
     private _watchAPI: k8s.Watch;
 
@@ -29,11 +29,11 @@ export class Watcher {
             this._subject.next(new WatchEventModel(
                 phase as WatchEventEnum,
                 apiObj,
-                this.ressources.has(apiObj['metadata']['uid']) ?
-                this._getDelta(this.ressources.get(apiObj['metadata']['uid']),apiObj) :
+                this.resources.has(apiObj['metadata']['uid']) ?
+                this._getDelta(this.resources.get(apiObj['metadata']['uid']),apiObj) :
                 []
             ));
-            this.ressources.set(apiObj['metadata']['uid'],apiObj);
+            this.resources.set(apiObj['metadata']['uid'],apiObj);
         } else {
             Logger.error(`Unknown event in phase ${phase}.`);
         }
