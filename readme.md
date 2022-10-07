@@ -23,7 +23,7 @@ class MyOperator {
 
     @O6r.event.update(B2rLocal.GROUP,B2rLocal.VERSION,B2rLocal.KIND_PLURAL,'spec')
     @O6r.event.create(B2rLocal.GROUP,B2rLocal.VERSION,B2rLocal.KIND_PLURAL)
-    public async onCreate(watcherEvent: WatchEventModel<B2rKindInterface>,kc: k8s.KubeConfig): Promise<void>{
+    public async onCreate(watcherEvent: WatchEventModel<KindOfMyOperatorInterface>,kc: k8s.KubeConfig): Promise<void>{
         console.log(`Create or update ${watcherEvent.resource.metadata.name}`);
         console.log(`Sepc :  ${watcherEvent.resource.metadata.spec}`);
         // apply is tool function for
