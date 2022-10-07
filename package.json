@@ -1,0 +1,41 @@
+{
+  "name": "metabase",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "/dist"
+  ],
+  "scripts": {
+    "build": "rm -rf dist && tsc -p tsconfig.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Franckrst/o6r.git"
+  },
+  "author": "Franck Ruysschaert",
+  "license": "MIT",
+  "dependencies": {
+    "@kubernetes/client-node": "^0.17.1",
+    "openid-client": "^5.1.10",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^7.5.6",
+    "twing": "^5.1.2",
+    "winston": "^3.8.2"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.1",
+    "@typescript-eslint/eslint-plugin": "^5.30.5",
+    "@typescript-eslint/parser": "^5.30.5",
+    "eslint": "^8.19.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-eslint-comments": "^3.2.0",
+    "eslint-plugin-functional": "^4.2.1",
+    "eslint-plugin-import": "^2.26.0",
+    "prettier": "^2.7.1",
+    "ts-node": "^10.8.2",
+    "tsdef": "0.0.14",
+    "typescript": "^4.7.4"
+  }
+}
