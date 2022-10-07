@@ -1,5 +1,5 @@
 import * as k8s from "@kubernetes/client-node";
-import {EventMangager} from "./EventManagager";
+import {EventMangager} from "./EventManager";
 
 export class O6r{
 
