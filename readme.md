@@ -2,6 +2,8 @@
 
 # 🪛 o6r
 
+[![npm version](https://badge.fury.io/js/o6r.svg)](https://badge.fury.io/js/o6r)
+
 **Simple framework for create Operator**
 
 </div>
