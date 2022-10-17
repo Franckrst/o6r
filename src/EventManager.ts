@@ -33,7 +33,7 @@ export class EventMangager{
         };
     }
     public static catch(groupe: string, version: string, kindPlural: string,deltaFilters?: string|string[]){
-        return function (target: object, propertyKey: string | Symbol, descriptor: TypedPropertyDescriptor<KindEventFunction>) {
+        return function (target: object, propertyKey: string | Symbol, descriptor: TypedPropertyDescriptor<KindEventCatchFunction>) {
             EventMangager.catchHandler.set(EventMangager._getCatchHandlerKey(groupe,version,kindPlural),target[propertyKey.toString()].bind(target));
         };
     }
