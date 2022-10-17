@@ -5,13 +5,14 @@ import {WatchEventModel} from "./watchEvent.model";
 import {Watcher} from "./watcher";
 import {AnyFunction} from "tsdef";
 import {O6r} from "./main";
-import {DecoratorHandler, KindEventFunction} from "./event-handler.type";
+import {DecoratorHandler, KindEventCatchFunction, KindEventFunction} from "./event-handler.type";
 
 
 export class EventMangager{
 
     private static watchers: Map<string,Watcher> = new Map();
     private static watchersSub: Map<AnyFunction,Subscription> = new Map();
+    private static catchHandler: Map<string,KindEventCatchFunction> = new Map();
 
     public static create(groupe: string, version: string, kindPlural: string){
         return function (target: object, propertyKey: string | Symbol, descriptor: TypedPropertyDescriptor<KindEventFunction>) {
@@ -30,6 +31,15 @@ export class EventMangager{
             Logger.info(`Bind event update of ${groupe}/${version}/${kindPlural} on ${propertyKey}`);
             EventMangager._addListener(WatchEventEnum.MODIFIED,target[propertyKey.toString()].bind(target),groupe,version,kindPlural,deltaFilters);
         };
+    }
+    public static catch(groupe: string, version: string, kindPlural: string,deltaFilters?: string|string[]){
+        return function (target: object, propertyKey: string | Symbol, descriptor: TypedPropertyDescriptor<KindEventFunction>) {
+            EventMangager.catchHandler.set(EventMangager._getCatchHandlerKey(groupe,version,kindPlural),target[propertyKey.toString()].bind(target));
+        };
+    }
+
+    private static _getCatchHandlerKey(groupe ?: string, version ?: string, kindPlural ?: string): string {
+        return `${groupe}/${version}/${kindPlural}`
     }
 
 
@@ -52,6 +62,13 @@ export class EventMangager{
                     fnc(event, O6r.kc);
                 }catch (e) {
                     Logger.error(e);
+                    try {
+                        EventMangager.catchHandler
+                            .get(EventMangager._getCatchHandlerKey(groupe,version,kindPlural))
+                            (e,event,O6r.kc);
+                    }catch (e) {
+                        Logger.error(e);
+                    }
                 }
             }));
     }
