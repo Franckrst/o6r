@@ -66,9 +66,12 @@ export class EventMangager{
                 }catch (e) {
                     Logger.error(e);
                     try {
-                        EventMangager.catchHandler
+                        const reslut = EventMangager.catchHandler
                             .get(EventMangager._getCatchHandlerKey(groupe,version,kindPlural))
                             (e,event,O6r.kc);
+                        if(reslut instanceof Promise){
+                            await reslut;
+                        }
                     }catch (e) {
                         Logger.error(e);
                     }
