@@ -57,9 +57,12 @@ export class EventMangager{
         this.watchersSub.set(fnc,this.watchers.get(watcherKey).obs
             .pipe(EventMangager._filterEvent(event,deltaFilters)
             )
-            .subscribe(event => {
+            .subscribe(async event => {
                 try {
-                    fnc(event, O6r.kc);
+                    const reslut = fnc(event, O6r.kc);
+                    if(reslut instanceof Promise){
+                        await reslut;
+                    }
                 }catch (e) {
                     Logger.error(e);
                     try {
