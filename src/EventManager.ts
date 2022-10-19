@@ -23,7 +23,7 @@ export class EventMangager{
     public static remove(groupe: string, version: string, kindPlural: string){
         return function (target: object, propertyKey: string | Symbol, descriptor: TypedPropertyDescriptor<KindEventFunction>) {
             Logger.info(`Bind event remove of ${groupe}/${version}/${kindPlural} on ${propertyKey}`);
-            EventMangager._addListener(WatchEventEnum.REMOVE,target[propertyKey.toString()].bind(target),groupe,version,kindPlural);
+            EventMangager._addListener(WatchEventEnum.DELETED,target[propertyKey.toString()].bind(target),groupe,version,kindPlural);
         };
     }
     public static update(groupe: string, version: string, kindPlural: string,deltaFilters?: string|string[]){
